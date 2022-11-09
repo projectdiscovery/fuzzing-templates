@@ -1,0 +1,39 @@
+
+id: ssrf-oast
+
+info:
+  name: Blind SSRF OAST Detection
+  author: pdteam
+  severity: medium
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    payloads:
+      redirect:
+        - "{{interactsh-url}}"
+
+    fuzzing:
+      - part: query
+        type: replace
+        mode: single
+        values:
+          - "https?://" # Replace HTTP URLs with alternatives
+        fuzz:
+          - "https://{{redirect}}"
+
+      - part: query
+        type: replace
+        mode: single
+        values:
+          - "^[A-Za-z0-9-._]+:[0-9]+$" # Replace <host>:<port> with alternative
+        fuzz:
+          - "{{redirect}}:80"
+
+    matchers:
+      - type: word
+        part: interactsh_protocol  # Confirms the HTTP Interaction
+        words:
+          - "http"
