@@ -7,9 +7,8 @@ info:
   tags: xss,reflected,dast
 
 variables:
-  first: "{{rand_int(1000, 9999)}}"
-  second: "{{rand_int(1000, 9999)}}"
-
+  first: "{{rand_int(10000, 99999)}}"
+  
 requests:
   - method: GET
     path:
@@ -17,7 +16,7 @@ requests:
 
     payloads:
       reflection:
-        - "{{first}}'\"><{{second}}"
+        - "'\"><{{first}}"
 
     stop-at-first-match: true
     fuzzing:
@@ -26,7 +25,7 @@ requests:
         mode: single
         fuzz:
           - "{{reflection}}"
-          
+
     matchers-condition: and
     matchers:
       - type: word

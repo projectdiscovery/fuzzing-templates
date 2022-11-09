@@ -10,7 +10,7 @@ requests:
   - method: GET
     path:
       - "{{BaseURL}}"
-
+    
     payloads:
       reflection:
         - '%0D%0ASet-Cookie:crlfinjection=crlfinjection'
