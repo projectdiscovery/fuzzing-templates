@@ -1,0 +1,32 @@
+id: cookie-injection
+
+info:
+  name: Parameter based cookie injection
+  author: pdteam
+  severity: medium
+  tags: xss,reflected,dast,cookie-injection
+
+variables:
+  first: "pdcookieinjpd"
+  
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    payloads:
+      reflection:
+        - "{{first}}"
+
+    fuzzing:
+      - part: query
+        type: postfix
+        mode: single
+        fuzz:
+          - "{{reflection}}"
+
+    matchers:
+      - type: regex
+        part: header
+        regex:
+          - '(?m)(?i)(^set-cookie.*pdcookieinjpd.*)'
