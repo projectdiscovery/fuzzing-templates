@@ -1,0 +1,30 @@
+id: open-redirect
+
+info:
+  name: Open Redirect Detection
+  author: princechaddha
+  severity: medium
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    payloads:
+      redirect:
+        - "interact.sh"
+
+    fuzzing:
+      - part: query
+        type: replace
+        mode: single
+        values:
+          - "https?://" # Replace HTTP URLs with alternatives
+        fuzz:
+          - "https://{{redirect}}"
+
+    matchers:
+      - type: regex
+        part: header
+        regex:
+          - '(?m)^(?:Location\s*?:\s*?)(?:https?:\/\/|\/\/|\/\\\\|\/\\)?(?:[a-zA-Z0-9\-_\.@]*)interact\.sh\/?(\/|[^.].*)?$' # https://regex101.com/r/ZDYhFh/1
