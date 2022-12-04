@@ -1,7 +1,7 @@
-id: open-redirect-keyed
+id: open-redirect
 
 info:
-  name: Open Redirect Keyed Detection
+  name: Open Redirect Detection
   author: princechaddha
   severity: medium
 
@@ -12,16 +12,11 @@ requests:
 
     payloads:
       redirect:
-        - "interact.sh"
+        - "test.com"
 
     fuzzing:
       - part: query
-        type: replace
         mode: single
-        values:
-          - "https?://" # Replace HTTP URLs with alternatives
-        fuzz:
-          - "https://{{redirect}}"
         keys:
           - next
           - url
@@ -43,9 +38,26 @@ requests:
           - checkout_url
           - continue
           - return_path
+        fuzz:
+          - "https://{{redirect}}"
 
+      - part: query
+        mode: single
+        values:
+          - "https?://" # Replace HTTP URLs with alternatives
+        fuzz:
+          - "https://{{redirect}}"
+
+    stop-at-first-match: true
+    matchers-condition: and
     matchers:
       - type: regex
         part: header
         regex:
-          - '(?m)^(?:Location\s*?:\s*?)(?:https?:\/\/|\/\/|\/\\\\|\/\\)?(?:[a-zA-Z0-9\-_\.@]*)interact\.sh\/?(\/|[^.].*)?$' # https://regex101.com/r/ZDYhFh/1
+          - '(?m)^(?:Location\s*?:\s*?)(?:https?:\/\/|\/\/|\/\\\\|\/\\)?(?:[a-zA-Z0-9\-_\.@]*)test\.com\/?(\/|[^.].*)?$' # https://regex101.com/r/ZDYhFh/1
+
+      - type: status
+        status:
+          - 301
+          - 302
+          - 307
