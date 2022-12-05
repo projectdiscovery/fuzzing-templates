@@ -70,4 +70,4 @@ requests:
       - type: word
         part: body
         words:
-          - "<h1> Interactsh Server </h1>"
+          - "Interactsh Server"
