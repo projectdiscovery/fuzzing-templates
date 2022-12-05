@@ -4,7 +4,7 @@ info:
   name: CRLF Injection
   author: pdteam
   severity: low
-  tags: crlf,reflected,dast
+  tags: crlf,dast
 
 requests:
   - method: GET
@@ -12,19 +12,19 @@ requests:
       - "{{BaseURL}}"
     
     payloads:
-      reflection:
+      crlf:
         - '%0D%0ASet-Cookie:crlfinjection=crlfinjection'
 
     fuzzing:
       - part: query
-        type: postfix
         mode: single
+        type: postfix
         fuzz:
-          - "{{reflection}}"
+          - "{{crlf}}"
     
     stop-at-first-match: true
-    extractors:
+    matchers:
       - type: regex
+        part: header
         regex:
           - '(?m)^(?:Set-Cookie\s*?:(?:\s*?|.*?;\s*?))(crlfinjection=crlfinjection)(?:\s*?)(?:$|;)'
-        part: header

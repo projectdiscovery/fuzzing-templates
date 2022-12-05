@@ -3,41 +3,39 @@ id: sqli-error-based
 info:
   name: Error based SQL Injection
   author: pdteam
-  severity: high
-  tags: sqli,error,dast
+  severity: critical
   description: |
     Direct SQL Command Injection is a technique where an attacker creates or alters existing SQL commands to expose hidden data,
     or to override valuable ones, or even to execute dangerous system level commands on the database host. 
     This is accomplished by the application taking user input and combining it with static parameters to build an SQL query .
+  tags: sqli,error,dast
 
 requests:
   - method: GET
     path:
       - "{{BaseURL}}"
     
-    stop-at-first-match: true
     payloads:
-      interaction:
+      injection:
         - "'"
         - "\""
         - ";"
-        # More can be added like ),(,NULL, etc
      
     fuzzing:
       - part: query
-        fuzz:
-          - "{{interaction}}"
         type: postfix
-        mode: single
-    
+        fuzz:
+          - "{{injection}}"
+
+    stop-at-first-match: true
     matchers-condition: and
     matchers:
       - type: word
+        part: body
         words:
           - "Adminer"
-        # False Positive
-        part: body
         negative: true
+        # False Positive
 
       - type: regex
         regex:
@@ -226,7 +224,7 @@ requests:
 
     extractors:
       - type: regex
-        name: MySQL
+        name: mysql
         regex:
           - "SQL syntax.*?MySQL"
           - "Warning.*?\\Wmysqli?_"
@@ -242,24 +240,24 @@ requests:
           - "SQLSTATE[\\d+]: Syntax error or access violation"
 
       - type: regex
-        name: MariaDB
+        name: mariadb
         regex:
           - "check the manual that (corresponds to|fits) your MariaDB server version"
 
       - type: regex
-        name: Drizzel
+        name: drizzel
         regex:
           - "check the manual that (corresponds to|fits) your Drizzle server version"
 
       - type: regex
-        name: MemSQL
+        name: memsql
         regex:
           - "MemSQL does not support this type of query"
           - "is not supported by MemSQL"
           - "unsupported nested scalar subselect"
 
       - type: regex
-        name: PostgreSQL
+        name: postgresql
         regex:
           - "PostgreSQL.*?ERROR"
           - "Warning.*?\\Wpg_"
@@ -275,7 +273,7 @@ requests:
           - "PSQLException"
 
       - type: regex
-        name: MicrosoftSQLServer
+        name: microsoftsqlserver
         regex:
           - "Driver.*? SQL[\\-\\_\\ ]*Server"
           - "OLE DB.*? SQL Server"
@@ -298,7 +296,7 @@ requests:
           - "Unclosed quotation mark after the character string"
 
       - type: regex
-        name: MicrosoftAccess
+        name: microsoftaccess
         regex:
           - "Microsoft Access (\\d+ )?Driver"
           - "JET Database Engine"
@@ -307,7 +305,7 @@ requests:
           - "Syntax error \\(missing operator\\) in query expression"
 
       - type: regex
-        name: Oracle
+        name: oracle
         regex:
           - "\\bORA-\\d{5}"
           - "Oracle error"
@@ -322,7 +320,7 @@ requests:
           - "OracleException"
 
       - type: regex
-        name: IBMDB2
+        name: ibmdb2
         regex:
           - "CLI Driver.*?DB2"
           - "DB2 SQL error"
@@ -335,7 +333,7 @@ requests:
           - "ibm_db_dbi\\.ProgrammingError"
 
       - type: regex
-        name: Informix
+        name: informix
         regex:
           - "Warning.*?\\Wifx_"
           - "Exception.*?Informix"
@@ -347,7 +345,7 @@ requests:
           - "IfxException"
 
       - type: regex
-        name: Firebird
+        name: firebird
         regex:
           - "Dynamic SQL Error"
           - "Warning.*?\\Wibase_"
@@ -355,7 +353,7 @@ requests:
           - "Pdo[./_\\\\]Firebird"
 
       - type: regex
-        name: SQLite
+        name: sqlite
         regex:
           - "SQLite/JDBCDriver"
           - "SQLite\\.Exception"
@@ -370,7 +368,7 @@ requests:
           - "SQLiteException"
 
       - type: regex
-        name: SAPMaxDB
+        name: sapmaxdb
         regex:
           - "SQL error.*?POS([0-9]+)"
           - "Warning.*?\\Wmaxdb_"
@@ -380,7 +378,7 @@ requests:
           - "\\[-3008\\].*?: Invalid keyword or missing delimiter"
 
       - type: regex
-        name: Sybase
+        name: sybase
         regex:
           - "Warning.*?\\Wsybase_"
           - "Sybase message"
@@ -390,7 +388,7 @@ requests:
           - "com\\.sybase\\.jdbc"
 
       - type: regex
-        name: Ingres
+        name: ingres
         regex:
           - "Warning.*?\\Wingres_"
           - "Ingres SQLSTATE"
@@ -398,7 +396,7 @@ requests:
           - "com\\.ingres\\.gcf\\.jdbc"
 
       - type: regex
-        name: FrontBase
+        name: frontbase
         regex:
           - "Exception (condition )?\\d+\\. Transaction rollback"
           - "com\\.frontbase\\.jdbc"
@@ -406,34 +404,34 @@ requests:
           - "(Semantic|Syntax) error \\[1-4\\]\\d{2}\\."
 
       - type: regex
-        name: HSQLDB
+        name: hsqldb
         regex:
           - "Unexpected end of command in statement \\["
           - "Unexpected token.*?in statement \\["
           - "org\\.hsqldb\\.jdbc"
 
       - type: regex
-        name: H2
+        name: h2
         regex:
           - "org\\.h2\\.jdbc"
           - "\\[42000-192\\]"
 
       - type: regex
-        name: MonetDB
+        name: monetdb
         regex:
           - "![0-9]{5}![^\\n]+(failed|unexpected|error|syntax|expected|violation|exception)"
           - "\\[MonetDB\\]\\[ODBC Driver"
           - "nl\\.cwi\\.monetdb\\.jdbc"
 
       - type: regex
-        name: ApacheDerby
+        name: apachederby
         regex:
           - "Syntax error: Encountered"
           - "org\\.apache\\.derby"
           - "ERROR 42X01"
 
       - type: regex
-        name: Vertica
+        name: vertica
         regex:
           - ", Sqlstate: (3F|42).{3}, (Routine|Hint|Position):"
           - "/vertica/Parser/scan"
@@ -442,14 +440,14 @@ requests:
           - "com\\.vertica\\.dsi\\.dataengine"
 
       - type: regex
-        name: Mckoi
+        name: mckoi
         regex:
           - "com\\.mckoi\\.JDBCDriver"
           - "com\\.mckoi\\.database\\.jdbc"
           - "&lt;REGEX_LITERAL&gt;"
 
       - type: regex
-        name: Presto
+        name: presto
         regex:
           - "com\\.facebook\\.presto\\.jdbc"
           - "io\\.prestosql\\.jdbc"
@@ -457,35 +455,35 @@ requests:
           - "UNION query has different number of fields: \\d+, \\d+"
 
       - type: regex
-        name: Altibase
+        name: altibase
         regex:
           - "Altibase\\.jdbc\\.driver"
 
       - type: regex
-        name: MimerSQL
+        name: mimersql
         regex:
           - "com\\.mimer\\.jdbc"
           - "Syntax error,[^\\n]+assumed to mean"
 
       - type: regex
-        name: CrateDB
+        name: cratedb
         regex:
           - "io\\.crate\\.client\\.jdbc"
 
       - type: regex
-        name: Cache
+        name: cache
         regex:
           - "encountered after end of query"
           - "A comparison operator is required here"
 
       - type: regex
-        name: RaimaDatabaseManager
+        name: raimadatabasemanager
         regex:
           - "-10048: Syntax error"
           - "rdmStmtPrepare\\(.+?\\) returned"
 
       - type: regex
-        name: Virtuoso
+        name: virtuoso
         regex:
           - "SQ074: Line \\d+:"
           - "SR185: Undefined procedure"

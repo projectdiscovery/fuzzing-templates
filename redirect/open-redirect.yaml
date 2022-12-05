@@ -4,6 +4,7 @@ info:
   name: Open Redirect Detection
   author: princechaddha
   severity: medium
+  tags: redirect,dast
 
 requests:
   - method: GET

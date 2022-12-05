@@ -9,7 +9,7 @@ info:
   reference:
     - https://bishopfox.com/blog/ruby-vulnerabilities-exploits
     - https://codeql.github.com/codeql-query-help/ruby/rb-kernel-open/
-  tags: cmdi,oast,dast,blind,ruby
+  tags: cmdi,oast,dast,blind,ruby,rce
 
 variables:
   marker: "{{interactsh-url}}"
@@ -28,8 +28,6 @@ requests:
       - part: query
         fuzz:
           - "{{interaction}}"
-        type: replace
-        mode: single
 
     matchers:
       - type: word
