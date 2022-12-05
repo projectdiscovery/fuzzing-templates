@@ -14,8 +14,8 @@ Fuzzing Templates
       
 <p align="center">
   <a href="https://nuclei.projectdiscovery.io/templating-guide/protocols/http-fuzzing/">Documentation</a> •
-  <a href="/graphs/contributors">Contributions</a> •
-  <a href="/discussions">Discussion</a> •
+  <a href="https://github.com/projectdiscovery/fuzzing-templates/graphs/contributors">Contributions</a> •
+  <a href="https://github.com/projectdiscovery/fuzzing-templates/discussions">Discussion</a> •
   <a href="https://discord.gg/projectdiscovery">Community</a>
 </p>
 
@@ -54,6 +54,7 @@ nuclei -t fuzzing-templates -list fuzz_endpoints.txt
 ```
 
 > **Note**:
+
 > *You can use existing nuclei options to filter / run specific directory / sub directory / templates or tags* 
 
 💬 Discussion
