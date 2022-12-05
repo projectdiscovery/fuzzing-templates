@@ -14,8 +14,8 @@ Fuzzing Templates
       
 <p align="center">
   <a href="https://nuclei.projectdiscovery.io/templating-guide/protocols/http-fuzzing/">Documentation</a> •
-  <a href="#/graphs/contributors">Contributions</a> •
-  <a href="#/discussions">Discussion</a> •
+  <a href="/graphs/contributors">Contributions</a> •
+  <a href="/discussions">Discussion</a> •
   <a href="https://discord.gg/projectdiscovery">Community</a>
 </p>
 
@@ -33,12 +33,35 @@ We welcome contributions from the community through pull requests or issues to i
 Please navigate to https://nuclei.projectdiscovery.io/templating-guide/protocols/http-fuzzing/ for detailed documentation to **build your own fuzzing** template.
 We have also added a set of templates to help you understand how things work.
 
+🌪️ Using Fuzzing Templates
+-----
+
+1. **Install Nuclei**
+
+```
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+```
+
+2. **Clone Fuzzing Templates**
+
+```
+git clone https://github.com/projectdiscovery/fuzzing-templates.git
+```
+
+3. **Run Fuzzing Templates**
+```
+nuclei -t fuzzing-templates -list fuzz_endpoints.txt
+```
+
+> **Note**:
+> *You can use existing nuclei options to filter / run specific directory / sub directory / templates or tags* 
 
 💬 Discussion
 -----
 
 Got questions / doubts / ideas to discuss?
 Feel free to open a discussion on [GitHub discussions](https://github.com/projectdiscovery/fuzzing-templates/discussions) board.
+
 
 👨‍💻 Community
 -----
