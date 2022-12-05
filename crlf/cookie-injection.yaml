@@ -8,7 +8,7 @@ info:
 
 variables:
   first: "cookie_injection"
-  
+
 requests:
   - method: GET
     path:
