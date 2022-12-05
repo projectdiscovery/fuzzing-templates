@@ -18,7 +18,7 @@ requests:
   - method: GET
     path:
       - "{{BaseURL}}"
-    
+
     stop-at-first-match: true
     payloads:
       interaction:
