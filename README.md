@@ -26,6 +26,9 @@ Fuzzing templates are used with [nuclei](https://github.com/projectdiscovery/nuc
 We welcome contributions from the community through pull requests or issues to increase the coverage of security testing. Unlike the [nuclei-templates](https://github.com/projectdiscovery/nuclei-templates) project, which focuses on known vulnerabilities, fuzzing templates are specifically designed to **discover previously unknown vulnerabilities** in applications.
 
 
+![image](https://user-images.githubusercontent.com/8293321/205839007-b18a1dc2-5b4e-4ee4-9051-c13b30089ee3.png)
+
+
 
 📖 Documentation
 -----
