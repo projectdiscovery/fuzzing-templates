@@ -36,6 +36,7 @@ We welcome contributions from the community through pull requests or issues to i
 Please navigate to https://nuclei.projectdiscovery.io/templating-guide/protocols/http-fuzzing/ for detailed documentation to **build your own fuzzing** template.
 We have also added a set of templates to help you understand how things work.
 
+
 🌪️ Using Fuzzing Templates
 -----
 
@@ -52,6 +53,28 @@ git clone https://github.com/projectdiscovery/fuzzing-templates.git
 ```
 
 3. **Run Fuzzing Templates**
+
+#### Input for fuzzing templates:
+
+Current fuzzing support is limited to URLs with with query parameters, so any urls with no query parameters will be simply ignored.
+
+```bash
+$ cat fuzz_endpoints.txt
+
+http://127.0.0.1:8082/info?name=test&another=value&random=data
+http://127.0.0.1:8082/redirect?redirect_url=/info?name=redirected_from_url
+http://127.0.0.1:8082/request?url=https://example.com
+http://127.0.0.1:8082/email?text=important_user
+http://127.0.0.1:8082/permissions?cmd=whoami
+http://127.0.0.1:8082/info?name=redirected_from_url
+```
+
+> **Note**:
+
+> *You can use [katana](https://github.com/projectdiscovery/katana) with query url filter (`-f qurl`) to get list of endpoints to run with url fuzzing templates* 
+
+#### Running fuzzing templates:
+
 ```
 nuclei -t fuzzing-templates -list fuzz_endpoints.txt
 ```
