@@ -1,10 +1,10 @@
-id: lfi-windows
+id: windows-lfi-fuzz
 
 info:
   name: Local File Inclusion - Windows
   author: pussycat0x
   severity: high
-  tags: lfi,dast
+  tags: lfi,windows,dast
 
 requests:
   - method: GET
@@ -12,7 +12,7 @@ requests:
       - '{{BaseURL}}'
 
     payloads:
-      escape:
+      win_fuzz:
         - '\WINDOWS\win.ini'
         - '\WINDOWS\win.ini'
         - '\WINDOWS\win.ini%00'
@@ -56,9 +56,9 @@ requests:
     fuzzing:
       - part: query
         type: postfix
-        mode: single
+        mode: multiple
         fuzz:
-          - '{{escape}}'
+          - '{{win_fuzz}}'
 
     stop-at-first-match: true
     matchers:
