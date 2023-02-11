@@ -1,7 +1,7 @@
-id: xxe
+id: fuzz-xxe
 
 info:
-  name: XXE Detection
+  name: XXE Fuzzing
   author: pwnhxl
   severity: medium
   reference:
@@ -23,14 +23,12 @@ requests:
 
     fuzzing:
       - part: query
-        mode: single
         keys-regex:
           - "(.*?)xml(.*?)"
         fuzz:
           - "{{xxe}}"
 
       - part: query
-        mode: single
         values:
           - "(<!DOCTYPE|<?xml|%3C!DOCTYPE|%3C%3Fxml)(.*?)>"
         fuzz:
@@ -40,11 +38,13 @@ requests:
     matchers-condition: or
     matchers:
       - type: regex
+        name: linux
         part: body
         regex:
           - 'root:.*?:[0-9]*:[0-9]*:'
 
       - type: word
+        name: windows
         part: body
         words:
           - 'for 16-bit app support'
