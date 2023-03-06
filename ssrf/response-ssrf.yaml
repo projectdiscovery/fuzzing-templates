@@ -2,7 +2,7 @@ id: response-ssrf
 
 info:
   name: Full Response SSRF Detection
-  author: high,pwnhxl
+  author: pdteam,pwnhxl
   severity: high
   reference:
     - https://github.com/bugcrowd/HUNT/blob/master/ZAP/scripts/passive/SSRF.py
