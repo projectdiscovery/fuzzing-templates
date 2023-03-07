@@ -3,7 +3,7 @@ id: lfi-keyed
 info:
   name: Key LFI Detection
   author: pwnhxl
-  severity: unknnown
+  severity: unknown
   reference:
     - https://owasp.org/www-community/attacks/Unicode_Encoding
   tags: dast,pathtraversal,lfi
