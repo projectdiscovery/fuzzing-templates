@@ -113,6 +113,19 @@ requests:
           - validate
           - view
           - window
+          - back
+          - cgi
+          - follow
+          - home
+          - jump
+          - link
+          - location
+          - menu
+          - move
+          - nav
+          - orig_url
+          - out_url
+          - query
         fuzz:
           - "https://{{redirect}}"
 
