@@ -18,6 +18,7 @@ requests:
       nix_fuzz:
         - '/etc/passwd'
         - '../../etc/passwd'
+        - '//////////////////../../../../../../../../etc/passwd'
         - '../../../etc/passwd'
         - '/../../../../etc/passwd'
         - '../../../../../../../../../etc/passwd'
