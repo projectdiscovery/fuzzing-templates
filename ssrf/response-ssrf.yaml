@@ -107,19 +107,19 @@ http:
       - type: regex
         part: body
         regex:
-          - 'dns-conf/(.*?)instance/'
+          - 'dns-conf\/[\s\S]+instance\/'
 
       - type: regex
         part: body
         regex:
-          - 'app-id(.*?)placement/'
+          - 'app-id[\s\S]+placement\/'
 
       - type: regex
         part: body
         regex:
-          - 'ami-id(.*?)placement/'
+          - 'ami-id[\s\S]+placement\/'
 
       - type: regex
         part: body
         regex:
-          - 'id(.*?)interfaces/'
+          - 'id[\s\S]+interfaces\/'
