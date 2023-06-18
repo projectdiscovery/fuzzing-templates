@@ -14,8 +14,8 @@ http:
     payloads:
       ssrf:
         - "{{interactsh-url}}"
-        - "http://{{FQDN}}.{{interactsh-url}}"
-        - "http://{{RDN}}.{{interactsh-url}}"
+        - "{{FQDN}}.{{interactsh-url}}"
+        - "{{RDN}}.{{interactsh-url}}"
 
     fuzzing:
       - part: query
