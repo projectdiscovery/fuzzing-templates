@@ -33,7 +33,7 @@ We welcome contributions from the community through pull requests or issues to i
 📖 Documentation
 -----
 
-Please navigate to https://nuclei.projectdiscovery.io/templating-guide/protocols/http-fuzzing/ for detailed documentation to **build your own fuzzing** template.
+Please navigate to https://docs.nuclei.sh/template-guide/http/http-fuzzing for detailed documentation to **build your own fuzzing** template.
 We have also added a set of templates to help you understand how things work.
 
 
