@@ -2,7 +2,7 @@ id: cmdi-blind-oast-polyglot
 
 info:
   name: Blind OS Command Injection
-  author: pdteam
+  author: pdteam,geeknik
   severity: high
   description: |
       Potential blind OS command injection vulnerabilities, where the application constructs OS commands using unsanitized user input. 
