@@ -39,15 +39,8 @@ http:
         part: interactsh_protocol
         words:
           - "dns"
+
       - type: word
         part: interactsh_protocol
         words:
           - "http"
-      - type: status
-        part: response
-        status:
-          - 500
-      - type: regex
-        part: header
-        regex:
-          - "error|exception|unexpected|failed"
