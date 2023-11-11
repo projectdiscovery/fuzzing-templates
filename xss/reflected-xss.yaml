@@ -8,7 +8,7 @@ info:
 
 variables:
   first: "{{rand_int(10000, 99999)}}"
-
+  
 http:
   - method: GET
     path:
@@ -17,6 +17,11 @@ http:
     payloads:
       reflection:
         - "'\"><{{first}}"
+        - "<img src=x onerror=alert({{first}})>"
+        - "<script>alert({{first}})</script>"
+        - "</script><script>alert({{first}})</script>"
+        - "<body onload=alert({{first}})>"
+        - "<marquee><img src=x onerror=confirm({{first}})></marquee>"
 
     fuzzing:
       - part: query
