@@ -19,6 +19,7 @@ http:
         - "'\"><{{first}}"
         - "<img src=x onerror=alert({{first}})>"
         - "<script>alert({{first}})</script>"
+        - ""><ScRiPt>alert({{first}})</sCrIpT>"
         - "</script><script>alert({{first}})</script>"
         - "</script><script>alert(%27{{first}}%27)</script>%27"><41707"
         - "<body onload=alert({{first}})>"
