@@ -4,7 +4,8 @@ info:
   name: Blind Cross Site Scripting
   author: 0xKayala (Satya Prakash)
   severity: high
-  tags: xss, blind-xss, dast, bxss
+  description: This template will spray blind XSS payloads into URLs. Use 'xss.report', 'bxsshunter.com', 'xsshunter.trufflesecurity.com', 'ez.pe' or 'self-hosted server' to check if the payload fired.
+  tags: xss, blind-xss, dast, bxss, generic
 
 variables:
   first: "{{rand_int(10000, 99999)}}"
