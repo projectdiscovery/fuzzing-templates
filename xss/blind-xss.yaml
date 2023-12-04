@@ -2,7 +2,7 @@ id: blind-xss
 
 info:
   name: Blind Cross Site Scripting
-  author: Satya Prakash (0xKayala)
+  author: 0xKayala (Satya Prakash)
   severity: high
   tags: xss, blind-xss, dast, bxss
 
