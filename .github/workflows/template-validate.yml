@@ -28,4 +28,3 @@ jobs:
         run: |
           cp -r ${{ github.workspace }} $HOME
           nuclei -validate -lfa
-          nuclei -validate -lfa -w ./workflows
