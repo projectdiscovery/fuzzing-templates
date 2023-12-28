@@ -152,6 +152,9 @@ http:
           - target_url
           - to_url
           - validate_url
+          - DirectTo
+          - relay
+          
         fuzz:
           - "https://{{redirect}}"
 
