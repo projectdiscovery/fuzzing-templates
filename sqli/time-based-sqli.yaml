@@ -4,7 +4,8 @@ info:
   name: Time-Based Blind SQL Injection
   author: 0xKayala
   severity: Critical
-  description: Detects time-based blind SQL injection vulnerability
+  description: This Template detects time-based Blind SQL Injection vulnerability
+  tags: sqli,dast,time
 
 http:
   - method: GET
