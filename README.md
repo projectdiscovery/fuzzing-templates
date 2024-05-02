@@ -33,7 +33,7 @@ We welcome contributions from the community through pull requests or issues to i
 📖 Documentation
 -----
 
-Please navigate to https://docs.nuclei.sh/template-guide/http/http-fuzzing for detailed documentation to **build your own fuzzing** template.
+Please navigate to https://docs.projectdiscovery.io/templates/protocols/http/fuzzing-overview for detailed documentation to **build your own fuzzing** template.
 We have also added a set of templates to help you understand how things work.
 
 
@@ -46,13 +46,7 @@ We have also added a set of templates to help you understand how things work.
 go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 ```
 
-2. **Clone Fuzzing Templates**
-
-```
-git clone https://github.com/projectdiscovery/fuzzing-templates.git
-```
-
-3. **Run Fuzzing Templates**
+2. **Run Fuzzing Templates**
 
 #### Input for fuzzing templates:
 
@@ -69,19 +63,17 @@ http://127.0.0.1:8082/permissions?cmd=whoami
 http://127.0.0.1:8082/info?name=redirected_from_url
 ```
 
-> **Note**:
-
+> [!NOTE]
 > *You can use [katana](https://github.com/projectdiscovery/katana) with query url filter (`-f qurl`) to get list of endpoints to run with url fuzzing templates* 
 
 #### Running fuzzing templates:
 
 ```
-nuclei -t fuzzing-templates -list fuzz_endpoints.txt
+nuclei -list fuzz_endpoints.txt -dast
 ```
 
-> **Note**:
-
-> *You can use existing nuclei options to filter / run specific directory / sub directory / templates or tags* 
+> [!NOTE]
+> *You can use existing nuclei options to filter / run specific dast templates by tags or templates*
 
 💬 Discussion
 -----

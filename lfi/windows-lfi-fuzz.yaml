@@ -7,9 +7,10 @@ info:
   tags: lfi,windows,dast
 
 http:
-  - method: GET
-    path:
-      - '{{BaseURL}}'
+  - pre-condition:
+      - type: dsl
+        dsl:
+          - 'method == "GET"'
 
     payloads:
       win_fuzz:

@@ -15,9 +15,10 @@ variables:
   result: "{{to_number(first)*to_number(second)}}"
 
 http:
-  - method: GET
-    path:
-      - "{{BaseURL}}"
+  - pre-condition:
+      - type: dsl
+        dsl:
+          - 'method == "GET"'
 
     skip-variables-check: true
     payloads:
